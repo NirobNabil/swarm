@@ -1,0 +1,58 @@
+
+struct Coordinate {
+    int x;
+    int y;
+}
+
+struct Path {
+    vector< coordinate > coordinates;
+};
+
+struct Map {
+    vector< vector< Coordinate > > map;
+}
+
+struct Task {
+    Coordinate startPos;
+    Coordinate endPos;
+}
+
+struct BotState {
+    int id;
+    int maxCapacity;
+    int currentCapacity;
+    Path currentPath;
+    Task currentTasks[];
+}
+
+struct AllBotState {
+    BotState bots[];
+}
+
+// function that takes two coordinates and the map
+// returns the shortest path ( vector of coordinates ) between those coordinates
+Path shortest_path( Coordinate c1, Coordinate c2, Map m );
+
+
+Path calculateNewPathForBotState( BotState botState ) {
+    // return the optimal path required to complete all the tasks in botState.currentTasks; 
+}
+
+
+int getTimeTakenForTaskByBot( Task t, BotState botState ) {
+    // return calculateNewPathForBotState( botState ).length() 
+}
+
+
+BotState findBestBotForTask( Task t, AllBotState botStates ) {
+    BotState bestBot;
+    int minTimeTaken;
+    for every bot b in botStates:
+        if getTimeTakenForTaskByBot( b ) < minTimeTaken:
+            bestBot = b;
+}
+
+void addNewTaskToWarehoues( Task t ) {
+    // find the best bot for given task using findBestBotForTask() 
+    // then assign this task t to the bestBot and update allBotStates
+}
