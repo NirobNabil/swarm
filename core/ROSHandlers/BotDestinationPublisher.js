@@ -1,13 +1,15 @@
 const ROSLIB = require('roslib')
-const ros = require('./connection')
+const rosConn = require('./connection')
 const DestinationHandler = require('../RobotHandlers/DestinationHandler')
 
-const publishRate = 10; // in Hertz
+const publishRate = 2; // in Hertz
 
 // { botId: publisher_timer_id }
 const publishers = {}
 
 const addPublisher = (botId) => {
+    const ros = rosConn.getROSInstance();
+
     var publisher = new ROSLIB.Topic({
         ros: ros,
         name: `/destination/${botId}`,
@@ -19,10 +21,11 @@ const addPublisher = (botId) => {
             data: JSON.stringify(DestinationHandler.getDestination(botId))
         }) 
         publisher.publish(msg)
+        // console.log("published ", DestinationHandler.getDestination(botId))
         
         publishers[botId] = setTimeout( () => {
             publish()
-        }, 1/publishRate )
+        }, 1000/publishRate )
     };
     
     publish();

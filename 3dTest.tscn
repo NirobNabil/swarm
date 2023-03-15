@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Main3d.gd" type="Script" id=2]
+[ext_resource path="res://ROSStdMsgsString/ROSTestStringPublisher.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ROSTestTopic/ROSTestTopicSubscriber.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Warehouse.gd" type="Script" id=5]
+
+[sub_resource type="PlaneShape" id=2]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Warehouse" type="Spatial" parent="."]
+script = ExtResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Warehouse"]
+
+[node name="CSGBox" type="CSGBox" parent="Warehouse/StaticBody"]
+width = 19.8433
+height = 0.355
+depth = 19.766
+
+[node name="CollisionShape" type="CollisionShape" parent="Warehouse/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="ROSTestStringPublisher" parent="." instance=ExtResource( 3 )]
+
+[node name="ROSTestTopicSubscriber" parent="." instance=ExtResource( 4 )]
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform( -0.341335, 0, 0.943802, 0, 2.45101, 0, -2.30491, 0, -0.833591, 3.05319, 3.56086, 3.67752 )
+text = "health bar stonks"
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1, -2.5522e-08, 8.36144e-08, 0, 0.956437, 0.291938, -8.74228e-08, 0.291938, -0.956437, 0, 2.643, -10.114 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.440252, 0.897874, 0, -0.897874, 0.440252, 0, 8.65911, 7.43978 )

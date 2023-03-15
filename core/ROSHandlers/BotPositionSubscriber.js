@@ -1,6 +1,7 @@
 const ROSLIB = require('roslib')
-const ros = require('./connection')
+const rosConn = require('./connection')
 const BotStateHandler = require('../RobotHandlers/BotStateHandler')
+const DestinationHandler = require('../RobotHandlers/DestinationHandler')
 const { parsePositionJSON } = require('./util')
 
 // { botId: listener_object }
@@ -8,6 +9,8 @@ const listeners = {}
 
 
 const addListener = (botId) => {
+    const ros = rosConn.getROSInstance();
+
     var listener = new ROSLIB.Topic({
         ros: ros,
         name: `/position/${botId}`,
@@ -15,7 +18,10 @@ const addListener = (botId) => {
     })
 
     listener.subscribe(function(message) {
-        BotStateHandler.updateBotState( botId, parsePositionJSON(message) );
+        // console.log(parsePositionJSON(message.data))
+        BotStateHandler.updateBotState( botId, { curPos: parsePositionJSON(message.data) } );
+        DestinationHandler.updatePathAccordingToPosition(botId);
+        // console.log("subscribed ", JSON.parse(message.data))
     });
     
 } 
