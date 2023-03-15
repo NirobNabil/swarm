@@ -27,6 +27,13 @@ function withinGrid(curX, curY, row, col) {
 	return false;
 }
 
+function arrayToPos(posArray) {
+	return {
+		x: posArray[0],
+		y: posArray[1],
+	}
+}
+
 function minDistance(gameBoard, stX, stY, enX, enY) {
 	var source = new QItem(0, 0, 0);
 	var prev = [];
@@ -68,9 +75,9 @@ function minDistance(gameBoard, stX, stY, enX, enY) {
 			{
 				res.push(prev[p.row][p.col]);
 				[p.row, p.col] = prev[p.row][p.col];
-				console.log(p.row,p.col);// prev[p.row][p.col]);
+				//console.log(p.row,p.col);// prev[p.row][p.col]);
 			}
-			return res;
+			return res.map(v => arrayToPos(v)).reverse();
 		}
 		// moving up
 		if (withinGrid(p.row - 1, p.col, row, col) && visited[p.row - 1][p.col] == false) {
