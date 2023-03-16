@@ -4,7 +4,9 @@ const grid = require('./gridMaking.js');
 const {input} = require('./input');
 const path = require('./shortestPath.js')
 const BotStateHandler = require('./RobotHandlers/BotStateHandler')
+const server = require('../core/server/index')
 // const Qclass = require('./dataTypes.js');
+
 
 
 
@@ -12,6 +14,8 @@ gameBoard = grid.createBoard(input.gridLength,input.gridWidth);
 grid.initShelf(input.noOfShelfs,gameBoard,input.shelfCoordinates);
 grid.displayBoard(gameBoard);
 
+
+server.start(4000);
 
 // const readline = require('readline').createInterface({
 //     input: process.stdin,
