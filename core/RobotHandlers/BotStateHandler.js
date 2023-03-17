@@ -3,8 +3,8 @@ const BotPositionSubscriber = require('../ROSHandlers/BotPositionSubscriber')
 
 const defaultBotState = {
     id: 'robotDefault',
-    maxCapacity: 20,
-    curCapacity: 20,
+    maxCapacity: 200,
+    curCapacity: 200,
     tasks: [],
     path: [],
     curPos: {
@@ -22,6 +22,8 @@ const updateBotState = (botId, botState) => {
     }
 }
 
+const getBotStates = () => botStates;
+
 const getBotState = (botId) => {
     return {...botStates[botId]};
 }
@@ -29,6 +31,7 @@ const getBotState = (botId) => {
 const addBot = (botId, botState = defaultBotState) => {
     // TODO: write code to add bot in godot as well
     botStates[botId] = { ...defaultBotState, id: botId };
+    console.log("add bot ", botId);
     BotDestinationPublisher.addPublisher(botId);
     BotPositionSubscriber.addListener(botId);
 }
@@ -44,3 +47,4 @@ exports.updateBotState = updateBotState;
 exports.getBotState = getBotState;
 exports.addBot = addBot;
 exports.removeBot = removeBot;
+exports.getBotStates = getBotStates;

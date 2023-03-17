@@ -16,6 +16,24 @@ const updatePathAccordingToPosition = (botId) => {
             path: botStateHandler.getBotState(botId).path.slice(1)  // remove the next
         })
     }
+
+    const botState = botStateHandler.getBotState(botId);
+    for( let i=0; i<botState.tasks.length; i++ ) {
+        const task = botState.tasks[i];
+        // console.log(task.endPos, position);
+        if( 
+            checkPositionEqual( {...task.endPos, y:task.endPos.y-1}, position )
+        ||  checkPositionEqual( {...task.endPos, y:task.endPos.y+1}, position )
+        ||  checkPositionEqual( {...task.endPos, x:task.endPos.x-1}, position )
+        ||  checkPositionEqual( {...task.endPos, x:task.endPos.x+1}, position )
+        ) {
+            botState.curCapacity += botState.tasks[i].weight;
+            botState.tasks = [...botState.tasks.slice(0,i), ...botState.tasks.slice(i+1)];
+            // console.log(botState.tasks);
+            break;
+        }
+    }
+    botStateHandler.updateBotState( botId, { ...botState } )
 }
 
 

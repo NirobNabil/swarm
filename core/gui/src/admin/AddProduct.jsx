@@ -7,12 +7,19 @@ import Button from '@mui/material/Button';
 import { getShelves, getProducts } from '../data/warehouse'
 import { useState } from 'react';
 
+import { addProductToList } from '../api';
+
 
 export default () => {
 
   const products = getProducts();
 
   const [product, setProduct] = useState(products['1'])
+
+  const handleAddProduct = () => {
+    console.log(product)
+    addProductToList( product.name, product.weight )
+  }
 
   return (
     <Box sx={{
@@ -34,7 +41,7 @@ export default () => {
         <TextField label="Weight" onChange={(e)=>{ setProduct( {...product, weight: e.target.value} ) }} />
       </FormControl>
 
-      <Button> Add to list </Button>
+      <Button onClick={handleAddProduct} > Add to list </Button>
 
     </Box>
   )

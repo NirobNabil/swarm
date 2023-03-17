@@ -15,7 +15,7 @@ const errorThreshold = 0.01
 func checkEqual( pos1:Vector3, pos2:Vector3 ):
 	return pos1.distance_to(pos2) < errorThreshold
 
-
+var once = false
 func _process(delta):
 
 	var cur_pos = self.transform.origin
@@ -27,11 +27,12 @@ func _process(delta):
 	if( checkEqual( cur_pos, _destination ) ):
 		return
 		
-	
+
 	if Input.is_action_pressed(("ui_right")):
-		move_and_slide(Vector3(.5,0,.5))
-		
+		print("came")
+			
 	print(self.transform.origin, _destination)
+
 	
 	move_and_slide( (_destination - cur_pos).normalized() * (delta*50) )
 		

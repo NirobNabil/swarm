@@ -2,13 +2,17 @@ const ROSLIB = require('roslib')
 
 //TODO: remove addbot from here
 const BotStateHandler = require('../RobotHandlers/BotStateHandler');
+const ShelfLocationsPublisher = require('./ShelfLocationsPublisher');
 
 const ros = new ROSLIB.Ros({
     url: 'ws://localhost:9090'
 });
 
 ros.on('connection', function() {
-    BotStateHandler.addBot('robot1')
+    ShelfLocationsPublisher.publishShelfData();
+    BotStateHandler.addBot('robot1');
+    BotStateHandler.addBot('robot2');
+    BotStateHandler.addBot('robot3');
     console.log('Connected to websocket server.');
 });
 

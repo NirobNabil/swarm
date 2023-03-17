@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://3d/Bookcase.obj" type="ArrayMesh" id=1]
+
+[node name="StaticBody2" type="StaticBody"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+
+[node name="CSGMesh" type="CSGMesh" parent="."]
+transform = Transform( 0.025, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0 )
+mesh = ExtResource( 1 )

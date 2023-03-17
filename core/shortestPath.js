@@ -35,6 +35,12 @@ function arrayToPos(posArray) {
 }
 
 function minDistance(gameBoard, stX, stY, enX, enY) {
+
+	stX = Math.round(stX);
+	stY = Math.round(stY);
+	enX = Math.round(enX);
+	enY = Math.round(enY);
+
 	var source = new QItem(0, 0, 0);
 	var prev = [];
 

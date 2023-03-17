@@ -1,6 +1,7 @@
 const ROSLIB = require('roslib')
 const rosConn = require('./connection')
 const DestinationHandler = require('../RobotHandlers/DestinationHandler')
+const BotStateHandler = require('../RobotHandlers/BotStateHandler')
 
 const publishRate = 2; // in Hertz
 
@@ -22,7 +23,8 @@ const addPublisher = (botId) => {
         }) 
         publisher.publish(msg)
         // console.log("published ", DestinationHandler.getDestination(botId))
-        
+        // console.log(BotStateHandler.getBotState(botId).path)
+
         publishers[botId] = setTimeout( () => {
             publish()
         }, 1000/publishRate )

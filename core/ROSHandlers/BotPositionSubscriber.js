@@ -19,7 +19,10 @@ const addListener = (botId) => {
 
     listener.subscribe(function(message) {
         // console.log(parsePositionJSON(message.data))
-        BotStateHandler.updateBotState( botId, { curPos: parsePositionJSON(message.data) } );
+        let curPos = parsePositionJSON(message.data);
+        curPos.x = Math.round(curPos.x);
+        curPos.y = Math.round(curPos.y);
+        BotStateHandler.updateBotState( botId, { curPos } );
         DestinationHandler.updatePathAccordingToPosition(botId);
         // console.log("subscribed ", JSON.parse(message.data))
     });
